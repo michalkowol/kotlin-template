@@ -1,0 +1,65 @@
+buildscript {
+    ext.kotlin_version = '1.0.0-beta-2422'
+    repositories {
+        jcenter()
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'kotlin'
+apply plugin: 'application'
+
+mainClassName = 'pl.michalkowol.BootKt'
+jar {
+    baseName = 'api'
+    version = '1.0.0'
+    manifest {
+        attributes 'Main-Class': 'pl.michalkowol.BootKt'
+    }
+}
+
+task fatJar(type: Jar) {
+    baseName = "${project.name}-assembly"
+    version = jar.version
+    manifest = jar.manifest
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}
+
+repositories {
+    jcenter()
+    mavenCentral()
+}
+
+sourceSets {
+    main {
+        kotlin {
+            srcDir 'src/main/kotlin'
+        }
+    }
+    test {
+        kotlin {
+            srcDir 'test/main/kotlin'
+        }
+    }
+    main.java.srcDirs += 'src/main/kotlin'
+}
+
+
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    compile 'org.slf4j:slf4j-api:1.7.13'
+    compile 'ch.qos.logback:logback-classic:1.1.3'
+
+    testCompile('junit:junit')
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.8'
+}
