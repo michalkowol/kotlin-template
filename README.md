@@ -23,12 +23,12 @@ java -jar build/libs/${NAME}-assembly-${VERSION}.jar
 ### Kovenant
 
 ```kotlin
-compile 'nl.komponents.kovenant:kovenant:2.9.0'
+// compile 'nl.komponents.kovenant:kovenant:3.0.0-beta.4'
 
 import nl.komponents.kovenant.*
 import nl.komponents.kovenant.functional.*
 
-fun longOperation(url: String): Promise<String, Exception> = async {
+fun longOperation(url: String): Promise<String, Exception> = task {
     val result = // ...
     result
 }
