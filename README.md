@@ -23,7 +23,7 @@ java -jar build/libs/${NAME}-assembly-${VERSION}.jar
 ### Kovenant
 
 ```kotlin
-// compile 'nl.komponents.kovenant:kovenant:3.0.0-beta.4'
+// compile 'nl.komponents.kovenant:kovenant:3.0.0'
 
 import nl.komponents.kovenant.*
 import nl.komponents.kovenant.functional.*
@@ -51,7 +51,7 @@ val nested: Promise<String, Exception> = foo("google.com").bind { result -> foo(
 ### Injekt
 
 ```kotlin
-// compile 'uy.kohesive.injekt:injekt-core:1.8.1'
+// compile 'uy.kohesive.injekt:injekt-core:1.14.+'
 
 import uy.kohesive.injekt.*
 import uy.kohesive.injekt.api.*
