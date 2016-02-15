@@ -12,6 +12,18 @@ gradle build
 gradle run
 ```
 
+## Continuous build
+
+```
+gradle run -t
+```
+
+or
+
+```
+gradle run --continuous
+```
+
 ## FatJar
 
 ```
