@@ -1,5 +1,5 @@
 buildscript {
-    ext.kotlin_version = '1.0.0'
+    ext.kotlin_version = '1.0.1-2'
     repositories {
         jcenter()
         mavenCentral()
@@ -35,28 +35,19 @@ repositories {
 }
 
 sourceSets {
-    main {
-        kotlin {
-            srcDir 'src/main/kotlin'
-        }
-    }
-    test {
-        kotlin {
-            srcDir 'test/main/kotlin'
-        }
-    }
+    main.kotlin.srcDirs += 'src/main/kotlin'
+    test.kotlin.srcDirs += 'test/main/kotlin'
     main.java.srcDirs += 'src/main/kotlin'
 }
 
-
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    compile 'org.slf4j:slf4j-api:1.7.16'
-    compile 'ch.qos.logback:logback-classic:1.1.5'
+    compile 'org.slf4j:slf4j-api:1.7.21'
+    compile 'ch.qos.logback:logback-classic:1.1.7'
 
     testCompile('junit:junit:4.12')
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '2.11'
+    gradleVersion = '2.12'
 }
