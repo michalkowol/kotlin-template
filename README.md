@@ -118,3 +118,4 @@ class Boot {
 ## References
 * [Kovenant - Promises for Kotlin](https://github.com/mplatvoet/kovenant)
 * [Injekt - Dependency Injection for Kotlin](https://github.com/kohesive/injekt)
+* [kotlinx.coroutines - libraries built upon Kotlin coroutines](https://github.com/Kotlin/kotlinx.coroutines)
