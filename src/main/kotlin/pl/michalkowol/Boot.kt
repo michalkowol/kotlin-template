@@ -4,6 +4,8 @@ import org.slf4j.LoggerFactory
 import spark.Request
 import spark.Response
 import spark.Spark.*
+import java.io.PrintWriter
+import java.io.StringWriter
 
 fun main(args: Array<String>) {
     Boot().start()
@@ -20,6 +22,12 @@ class Boot {
 
         exception(Exception::class.java, { e, request, response ->
             log.error(request.url(), e)
+            val errorMsgWriter = StringWriter()
+            e.printStackTrace(PrintWriter(errorMsgWriter))
+            val errorMsg = errorMsgWriter.toString()
+            response.type("text/plain")
+            response.status(500)
+            response.body(errorMsg)
         })
     }
 

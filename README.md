@@ -34,9 +34,34 @@ gradle run --continuous
 
 ## FatJar
 
+Sometimes you need to remove jars signatures:
+
+`build.gradle`:
+
+```groovy
+// ...
+task fatJar(type: Jar) {
+    baseName = "${project.name}-assembly"
+    manifest = jar.manifest
+    exclude('META-INF/*.SF')
+    exclude('META-INF/*.DSA')
+    exclude('META-INF/*.RSA')
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}
+// ...
+```
+
 ```
 gradle fatJar
 java -jar build/libs/${NAME}-assembly-${VERSION}.jar
+```
+
+## Code coverage
+
+```
+gradle jacocoTestReport
+open build/jacocoHtml/index.html
 ```
 
 ## Heroku
@@ -49,7 +74,76 @@ git push heroku master
 
 ## Code snippets 
 
-### Kovenant
+### Dagger
+
+`build.gradle`:
+
+```groovy
+// ...
+apply plugin: 'kotlin-kapt'
+// ...
+dependencies {
+    // ...
+    compile 'com.google.dagger:dagger:2.+'
+    kapt 'com.google.dagger:dagger-compiler:2.+'
+    // ...
+}
+// ...
+```
+
+```kotlin
+import dagger.Component
+import dagger.Module
+import dagger.Provides
+import javax.inject.Inject
+
+interface Pump {
+    fun pump(): String
+}
+interface Heater {
+    fun heat(): String
+}
+
+class Thermosiphon @Inject constructor(private val heater: Heater) : Pump {
+    override fun pump(): String {
+        heater.heat()
+        return "=> => pumping => =>"
+    }
+}
+
+class ElectricHeater : Heater {
+    override fun heat(): String = "~ ~ ~ heating ~ ~ ~"
+}
+
+data class CoffeeMaker @Inject constructor(val heater: Heater, val pump: Pump) {
+    fun brew(): String {
+        val heat = heater.heat()
+        val pump = pump.pump()
+        val coffee = " [_]P coffee! [_]P "
+        return "$heat\n$pump\n$coffee"
+    }
+}
+
+
+@Module
+class DripCoffeeModule {
+    @Provides fun provideHeater(): Heater = ElectricHeater()
+    @Provides fun providePump(pump: Thermosiphon): Pump = pump
+}
+
+@Component(modules = arrayOf(DripCoffeeModule::class))
+interface CoffeeShop {
+    fun maker(): CoffeeMaker
+}
+
+fun main(args: Array<String>) {
+    val coffeeShop = DaggerCoffeeShop.builder().build()
+    val maker = coffeeShop.maker()
+    println(maker.brew())
+}
+```
+
+### Kovenant (deprecated)
 
 ```kotlin
 // compile 'nl.komponents.kovenant:kovenant:3.0.0'
