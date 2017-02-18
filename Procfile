@@ -1,1 +1,1 @@
-web: java $JAVA_OPTS -jar build/libs/aurator-sql-assembly.jar
+web: java $JAVA_OPTS -jar build/libs/kotlin-template-assembly.jar

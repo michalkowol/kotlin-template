@@ -69,10 +69,27 @@ open build/jacocoHtml/index.html
 
 ## Heroku
 
+### Test on local
+
+```bash
+heroku local web
+```
+
+### Deploy
+
 ```bash
 heroku login
 heroku create
 git push heroku master
+heroku logs -t 
+```
+
+or
+
+```bash
+heroku git:remote -a NAME_OF_APP
+git push heroku master
+heroku logs -t 
 ```
 
 ## Code snippets 
