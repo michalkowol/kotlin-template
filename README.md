@@ -5,32 +5,34 @@
 
 ## Default
 
-```
+```bash
 gradle
 ```
 
 ## Build
 
-```
+```bash
 gradle build
 ```
 
 ## Run
 
-```
+```bash
 gradle run
 ```
 
-## Continuous build
+## Tests
 
-```
-gradle run -t
+```bash
+gradle check
 ```
 
-or
+## Continuous tests
 
-```
-gradle run --continuous
+```bash
+gradle test -t
+// or
+gradle test --continuous
 ```
 
 ## FatJar
@@ -53,21 +55,21 @@ task fatJar(type: Jar) {
 // ...
 ```
 
-```
+```bash
 gradle fatJar
 java -jar build/libs/${NAME}-assembly-${VERSION}.jar
 ```
 
 ## Code coverage
 
-```
+```bash
 gradle jacocoTestReport
 open build/jacocoHtml/index.html
 ```
 
 ## Heroku
 
-```
+```bash
 heroku login
 heroku create
 git push heroku master
