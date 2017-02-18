@@ -54,7 +54,7 @@ repositories {
 }
 
 dependencies {
-    ext.kotlinxcoroutines = '0.8-beta'
+    ext.kotlinxcoroutines = '0.10-rc'
 
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 

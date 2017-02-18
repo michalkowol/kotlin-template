@@ -69,6 +69,14 @@ open build/jacocoHtml/index.html
 
 ## Heroku
 
+### Procfile
+
+Remember to edit `Procfile`. Example content of the file:
+
+```bash
+web: java $JAVA_OPTS -jar build/libs/NAME-OF-THE-APP-assembly.jar
+```
+
 ### Test on local
 
 ```bash
@@ -201,7 +209,7 @@ someAutoCloseable.use { r ->
 }
 ```
 
-### Kovenant (deprecated)
+### Kovenant (deprecated - use [Coroutines](https://blog.jetbrains.com/kotlin/2016/07/first-glimpse-of-kotlin-1-1-coroutines-type-aliases-and-more/) instead)
 
 ```kotlin
 // compile 'nl.komponents.kovenant:kovenant:3.0.0'
