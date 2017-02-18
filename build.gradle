@@ -72,7 +72,7 @@ dependencies {
     compile "org.jetbrains.kotlinx:kotlinx-coroutines-rx:$kotlinxcoroutines"
 
     testCompile 'junit:junit:4.12'
-//    testCompile 'com.nhaarman:mockito-kotlin:1.+'
+    testCompile 'com.nhaarman:mockito-kotlin:1.+'
 }
 
 task wrapper(type: Wrapper) {
