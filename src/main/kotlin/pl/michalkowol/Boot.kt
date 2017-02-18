@@ -42,11 +42,8 @@ class Boot {
         return """{"id": $id}"""
     }
 
-    fun assignedPort(): Int {
-        val processBuilder = ProcessBuilder()
-        if (processBuilder.environment()["PORT"] != null) {
-            return Integer.parseInt(processBuilder.environment()["PORT"])
-        }
-        return 8080
+    private fun assignedPort(): Int {
+        val envs = System.getenv()
+        return envs["PORT"]?.toInt() ?: 8080
     }
 }

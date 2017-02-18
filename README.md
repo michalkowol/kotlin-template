@@ -1,6 +1,7 @@
 # Kotlin Template
 
 [![Build Status](https://travis-ci.org/michalkowol/kotlin-template.svg?branch=master)](https://travis-ci.org/michalkowol/kotlin-template)
+[![Coverage Status](https://codecov.io/github/michalkowol/kotlin-template/badge.svg?branch=master)](https://codecov.io/github/michalkowol/kotlin-template?branch=master)
 
 ## Default
 
@@ -81,6 +82,11 @@ git push heroku master
 ```groovy
 // ...
 apply plugin: 'kotlin-kapt'
+// ...
+sourceSets {
+    // for IntelliJ
+    main.java.srcDirs += "$buildDir/generated/source/kapt/main"
+}
 // ...
 dependencies {
     // ...

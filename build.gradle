@@ -36,15 +36,11 @@ build.mustRunAfter clean
 fatJar.mustRunAfter build
 stage.dependsOn(fatJar)
 
-sourceSets {
-    main.java.srcDirs += "$buildDir/generated/source/kapt/main"
-}
-
 jacocoTestReport {
     reports {
-        xml.enabled false
         csv.enabled false
-        html.destination "${buildDir}/jacocoHtml"
+        html.enabled true
+        xml.enabled true
     }
     dependsOn test
 }
