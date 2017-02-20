@@ -1,5 +1,7 @@
 package pl.michalkowol
 
+import com.softwareberg.SimpleHttpClient
+import kotlinx.coroutines.experimental.runBlocking
 import org.slf4j.LoggerFactory
 import spark.Request
 import spark.Response
@@ -8,17 +10,23 @@ import java.io.PrintWriter
 import java.io.StringWriter
 
 fun main(args: Array<String>) {
-    Boot().start()
+    val httpClient = SimpleHttpClient.create()
+    val jsonMapper = JsonMapper()
+    val hackerNews = HackerNews(httpClient, jsonMapper)
+    Boot(jsonMapper, hackerNews).start()
 }
 
-class Boot {
+class Boot(private val jsonMapper: JsonMapper, private val hackerNews: HackerNews) {
 
     private val log = LoggerFactory.getLogger(Boot::class.java)
 
     fun start() {
         port(assignedPort())
-        get("/foo", this::foo)
-        get("/bar/:id", this::bar)
+        get("/news/top", this::top)
+        get("/news/show", this::show)
+        get("/news/ask", this::ask)
+        get("/news/job", this::job)
+        get("/news/:id", this::newsById)
 
         exception(Exception::class.java, { e, request, response ->
             log.error(request.url(), e)
@@ -31,15 +39,35 @@ class Boot {
         })
     }
 
-    private fun foo(request: Request, response: Response): String {
-        response.type("text/plain")
-        return "foo"
+    private fun newsById(request: Request, response: Response): String {
+        response.type("application/json")
+        val id = request.params(":id").toInt()
+        val story = runBlocking { hackerNews.byId(id).await() }
+        return jsonMapper.write(story)
     }
 
-    private fun bar(request: Request, response: Response): String {
+    private fun top(request: Request, response: Response): String {
         response.type("application/json")
-        val id = request.params(":id")
-        return """{"id": $id}"""
+        val topStories = runBlocking { hackerNews.topStories().await() }
+        return jsonMapper.write(topStories)
+    }
+
+    private fun ask(request: Request, response: Response): String {
+        response.type("application/json")
+        val topStories = runBlocking { hackerNews.askStories().await() }
+        return jsonMapper.write(topStories)
+    }
+
+    private fun show(request: Request, response: Response): String {
+        response.type("application/json")
+        val topStories = runBlocking { hackerNews.showStories().await() }
+        return jsonMapper.write(topStories)
+    }
+
+    private fun job(request: Request, response: Response): String {
+        response.type("application/json")
+        val topStories = runBlocking { hackerNews.jobStories().await() }
+        return jsonMapper.write(topStories)
     }
 
     private fun assignedPort(): Int {

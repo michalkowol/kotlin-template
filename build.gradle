@@ -55,6 +55,7 @@ repositories {
 
 dependencies {
     ext.kotlinxcoroutines = '0.10-rc'
+    ext.jacksonVersion = '2.8.6'
 
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
@@ -66,10 +67,13 @@ dependencies {
     compile 'com.github.softwareberg:database:-SNAPSHOT'
     compile 'com.github.softwareberg:httpclient:-SNAPSHOT'
 
+    compile "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
+    compile "com.fasterxml.jackson.core:jackson-annotations:$jacksonVersion"
+    compile "com.fasterxml.jackson.module:jackson-module-kotlin:$jacksonVersion"
+
     compile "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinxcoroutines"
     compile "org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:$kotlinxcoroutines"
     compile "org.jetbrains.kotlinx:kotlinx-coroutines-nio:$kotlinxcoroutines"
-    compile "org.jetbrains.kotlinx:kotlinx-coroutines-rx:$kotlinxcoroutines"
 
     testCompile 'junit:junit:4.12'
     testCompile 'com.nhaarman:mockito-kotlin:1.+'
