@@ -55,7 +55,7 @@ repositories {
 
 dependencies {
     ext.kotlinxcoroutines = '0.10-rc'
-    ext.jacksonVersion = '2.8.6'
+    ext.rinca = '0.3.+'
 
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
@@ -64,12 +64,9 @@ dependencies {
 
     compile 'com.sparkjava:spark-core:2.5.+'
 
-    compile 'com.github.softwareberg:database:-SNAPSHOT'
-    compile 'com.github.softwareberg:httpclient:-SNAPSHOT'
-
-    compile "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
-    compile "com.fasterxml.jackson.core:jackson-annotations:$jacksonVersion"
-    compile "com.fasterxml.jackson.module:jackson-module-kotlin:$jacksonVersion"
+    compile "com.github.softwareberg.rinca:database:$rinca"
+    compile "com.github.softwareberg.rinca:httpclient:$rinca"
+    compile "com.github.softwareberg.rinca:json:$rinca"
 
     compile "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinxcoroutines"
     compile "org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:$kotlinxcoroutines"
@@ -80,5 +77,5 @@ dependencies {
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '3.3'
+    gradleVersion = '3.4'
 }

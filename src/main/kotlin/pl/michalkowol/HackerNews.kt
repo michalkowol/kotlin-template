@@ -3,6 +3,7 @@ package pl.michalkowol
 import com.softwareberg.HttpClient
 import com.softwareberg.HttpMethod
 import com.softwareberg.HttpRequest
+import com.softwareberg.JsonMapper
 import kotlinx.coroutines.experimental.CommonPool
 import kotlinx.coroutines.experimental.Deferred
 import kotlinx.coroutines.experimental.async

@@ -1,5 +1,6 @@
 package pl.michalkowol
 
+import com.softwareberg.JsonMapper
 import com.softwareberg.SimpleHttpClient
 import kotlinx.coroutines.experimental.runBlocking
 import org.slf4j.LoggerFactory
@@ -11,7 +12,7 @@ import java.io.StringWriter
 
 fun main(args: Array<String>) {
     val httpClient = SimpleHttpClient.create()
-    val jsonMapper = JsonMapper()
+    val jsonMapper = JsonMapper.create()
     val hackerNews = HackerNews(httpClient, jsonMapper)
     Boot(jsonMapper, hackerNews).start()
 }
