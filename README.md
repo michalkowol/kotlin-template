@@ -31,7 +31,11 @@ gradle check
 
 ```bash
 gradle test -t
-// or
+```
+
+or
+
+```bash
 gradle test --continuous
 ```
 
@@ -89,7 +93,7 @@ heroku local web
 heroku login
 heroku create
 git push heroku master
-heroku logs -t 
+heroku logs -t
 ```
 
 or
@@ -97,7 +101,7 @@ or
 ```bash
 heroku git:remote -a NAME_OF_APP
 git push heroku master
-heroku logs -t 
+heroku logs -t
 ```
 
 ## Code snippets 
