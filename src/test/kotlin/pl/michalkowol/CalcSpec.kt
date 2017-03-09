@@ -1,6 +1,8 @@
 package pl.michalkowol
 
-import org.junit.Assert.assertEquals
+import com.natpryce.hamkrest.assertion.assertThat
+import com.natpryce.hamkrest.equalTo
+import com.natpryce.hamkrest.should.shouldMatch
 import org.junit.Test
 
 class CalcSpec {
@@ -12,6 +14,7 @@ class CalcSpec {
         // when
         val sum = calc.add(2, 4)
         // then
-        assertEquals(6, sum)
+        assertThat(6, equalTo(sum))
+        6 shouldMatch equalTo(sum)
     }
 }
