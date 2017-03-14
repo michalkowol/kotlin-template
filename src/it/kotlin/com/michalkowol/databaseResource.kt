@@ -1,8 +1,8 @@
 package com.michalkowol
 
-import com.ninja_squad.dbsetup.DbSetup
-import com.ninja_squad.dbsetup.destination.DataSourceDestination
+import com.ninja_squad.dbsetup.Operations
 import com.ninja_squad.dbsetup.operation.Operation
+import com.ninja_squad.dbsetup_kotlin.dbSetup
 import com.typesafe.config.ConfigFactory
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
@@ -60,7 +60,7 @@ class DataSourceResource : ExternalResource() {
         flyway.migrate()
     }
 
-    fun prepareDatabase(operation: Operation) {
-        DbSetup(DataSourceDestination(dataSource), operation).launch()
+    fun prepareDatabase(vararg operations: Operation) {
+        dbSetup(dataSource) { execute(Operations.sequenceOf(operations.toList())) }.launch()
     }
 }

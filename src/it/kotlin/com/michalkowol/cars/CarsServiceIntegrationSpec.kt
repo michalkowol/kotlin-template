@@ -5,9 +5,7 @@ import com.michalkowol.H2DatabaseResource
 import com.natpryce.hamkrest.assertion.assertThat
 import com.natpryce.hamkrest.equalTo
 import com.natpryce.hamkrest.hasSize
-import com.ninja_squad.dbsetup.Operations
-import com.ninja_squad.dbsetup.Operations.deleteAllFrom
-import com.ninja_squad.dbsetup.Operations.insertInto
+import com.ninja_squad.dbsetup_kotlin.dbSetup
 import com.softwareberg.Database
 import org.junit.BeforeClass
 import org.junit.ClassRule
@@ -34,19 +32,18 @@ class CarsServiceIntegrationSpec {
         }
     }
 
-    private val deleteAllCars = deleteAllFrom("cars")
-
-    private val insertCars = insertInto("cars")
-        .columns("id", "name")
-        .values(1, "Audi")
-        .values(2, "Opel")
-        .values(3, "BMW")
-        .build()
-
     @Test
     fun itShouldFindAllCars() {
         // given
-        dataSourceResource.prepareDatabase(Operations.sequenceOf(deleteAllCars, insertCars))
+        dbSetup(dataSourceResource.dataSource) {
+            deleteAllFrom("cars")
+            insertInto("cars") {
+                columns("id", "name")
+                values(1, "Audi")
+                values(2, "Opel")
+                values(3, "BMW")
+            }
+        }.launch()
         val carsRepository = CarsRepository(Database(dataSourceResource.dataSource))
         // when
         val cars = carsRepository.findAll()

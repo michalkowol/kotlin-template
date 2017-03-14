@@ -3,9 +3,8 @@ package com.michalkowol.cars
 import com.despegar.sparkjava.test.SparkServer
 import com.michalkowol.DataSourceResource
 import com.michalkowol.H2DatabaseResource
-import com.ninja_squad.dbsetup.Operations
 import com.ninja_squad.dbsetup.Operations.deleteAllFrom
-import com.ninja_squad.dbsetup.Operations.insertInto
+import com.ninja_squad.dbsetup_kotlin.insertInto
 import com.softwareberg.Database
 import com.softwareberg.JsonMapper
 import org.hamcrest.CoreMatchers.containsString
@@ -49,16 +48,16 @@ class CarsControllerIntegrationSpec {
 
     private val deleteAllCars = deleteAllFrom("cars")
 
-    private val insertCars = insertInto("cars")
-        .columns("id", "name")
-        .values(1, "Audi")
-        .values(2, "VW")
-        .build()
+    private val insertCars = insertInto("cars") {
+        columns("id", "name")
+        values(1, "Audi")
+        values(2, "VW")
+    }
 
     @Test
     fun itShouldFindAllCarsWithRest() {
         // given
-        dataSourceResource.prepareDatabase(Operations.sequenceOf(deleteAllCars, insertCars))
+        dataSourceResource.prepareDatabase(deleteAllCars, insertCars)
         val getAllCars = testServer.get("/cars", false)
 
         // when

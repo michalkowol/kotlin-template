@@ -41,9 +41,9 @@ internal class BadRequest(
     override val id: UUID = UUID.randomUUID()
 ) : ServerError
 
-class NotFoundException(message: String, cause: Throwable? = null) : RuntimeException(message, cause)
+class NotFoundException(override val message: String, cause: Throwable? = null) : RuntimeException(message, cause)
 
-class BadRequestException(message: String, cause: Throwable? = null) : RuntimeException(message, cause)
+class BadRequestException(override val message: String, cause: Throwable? = null) : RuntimeException(message, cause)
 
 private object Errors {
     internal fun extractStackTrace(throwable: Throwable): String {
