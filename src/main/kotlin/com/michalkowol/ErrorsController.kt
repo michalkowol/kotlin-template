@@ -15,7 +15,7 @@ internal class ErrorsController @Inject constructor(private val jsonMapper: Json
         exception(NotFoundException::class.java) { ex, request, response ->
             log.info(request.url(), ex)
             response.type("application/json")
-            val notFound = NotFound(ex.message.orEmpty())
+            val notFound = NotFound(ex.message)
             response.status(notFound.status)
             response.body(jsonMapper.write(notFound))
         }
@@ -23,7 +23,7 @@ internal class ErrorsController @Inject constructor(private val jsonMapper: Json
         exception(BadRequestException::class.java) { ex, request, response ->
             log.info(request.url(), ex)
             response.type("application/json")
-            val badRequest = BadRequest(ex.message.orEmpty())
+            val badRequest = BadRequest(ex.message)
             response.status(badRequest.status)
             response.body(jsonMapper.write(badRequest))
         }

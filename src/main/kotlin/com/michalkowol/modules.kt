@@ -52,7 +52,6 @@ internal class JsonXmlModule : AbstractModule() {
 internal class DatabaseModule : AbstractModule() {
     override fun configure() {}
 
-
     @Singleton
     @Provides
     fun provideDataSource(config: Config): DataSource {

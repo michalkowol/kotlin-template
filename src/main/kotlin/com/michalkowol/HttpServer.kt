@@ -12,7 +12,13 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-internal class HttpServer @Inject constructor(private val serverConfiguration: ServerConfiguration, private val jsonMapper: JsonMapper, private val errorsController: ErrorsController, private val hackerNewsController: HackerNewsController, private val carsController: CarsController) {
+internal class HttpServer @Inject constructor(
+    private val serverConfiguration: ServerConfiguration,
+    private val jsonMapper: JsonMapper,
+    private val errorsController: ErrorsController,
+    private val hackerNewsController: HackerNewsController,
+    private val carsController: CarsController
+) {
 
     fun start() {
         port(serverConfiguration.port)
@@ -44,4 +50,5 @@ internal class HttpServer @Inject constructor(private val serverConfiguration: S
     }
 
     internal data class ServerConfiguration(val port: Int)
+
 }
