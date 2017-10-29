@@ -142,6 +142,12 @@ heroku local web
 ### Deploy
 
 ```bash
+git push heroku master
+```
+
+or
+
+```bash
 heroku login
 heroku create
 git push heroku master
