@@ -10,7 +10,8 @@ fun main(args: Array<String>) {
 object Boot {
 
     fun start() {
-        val injector = Configuration.createInjector()
+        val injector = Configuration.injector
+
         val h2DatabaseServer = injector.getInstance(Server::class.java)
         val flyway = injector.getInstance(Flyway::class.java)
         val httpServer = injector.getInstance(HttpServer::class.java)

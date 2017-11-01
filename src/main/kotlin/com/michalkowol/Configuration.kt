@@ -7,7 +7,9 @@ import com.michalkowol.hackernews.HackerNewsModule
 
 object Configuration {
 
-    fun createInjector(): Injector {
+    val injector = createInjector()
+
+    private fun createInjector(): Injector {
         return Guice.createInjector(
             ConfigModule(),
             ErrorsControllerModule(),
