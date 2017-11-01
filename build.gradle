@@ -9,7 +9,7 @@ apply plugin: 'jacoco'
 
 defaultTasks 'run'
 
-mainClassName = 'com.michalkowol.Boot'
+mainClassName = 'com.michalkowol.BootKt'
 jar {
     manifest {
         attributes 'Main-Class': mainClassName
@@ -104,6 +104,6 @@ dependencies {
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '4.2.1'
+    gradleVersion = '4.3'
     distributionType = 'ALL'
 }

@@ -3,11 +3,8 @@ package com.michalkowol
 import com.softwareberg.JsonMapper
 import org.slf4j.LoggerFactory
 import spark.Spark.exception
-import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
-internal class ErrorsController @Inject constructor(private val jsonMapper: JsonMapper) {
+internal class ErrorsController(private val jsonMapper: JsonMapper) {
 
     private val log = LoggerFactory.getLogger(ErrorsController::class.java)
 
@@ -36,4 +33,5 @@ internal class ErrorsController @Inject constructor(private val jsonMapper: Json
             response.body(jsonMapper.write(internalServerError))
         }
     }
+
 }

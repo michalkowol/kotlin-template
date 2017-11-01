@@ -32,6 +32,7 @@ internal class InternalServerError(
             return InternalServerError(ex.message, Errors.extractStackTrace(ex))
         }
     }
+
 }
 
 internal class BadRequest(
@@ -46,9 +47,11 @@ class NotFoundException(override val message: String, cause: Throwable? = null) 
 class BadRequestException(override val message: String, cause: Throwable? = null) : RuntimeException(message, cause)
 
 private object Errors {
+
     internal fun extractStackTrace(throwable: Throwable): String {
         val errorMsgWriter = StringWriter()
         throwable.printStackTrace(PrintWriter(errorMsgWriter))
         return errorMsgWriter.toString()
     }
+
 }

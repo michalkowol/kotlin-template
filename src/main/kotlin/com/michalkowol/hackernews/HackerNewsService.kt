@@ -9,11 +9,11 @@ import kotlinx.coroutines.experimental.Deferred
 import kotlinx.coroutines.experimental.async
 import kotlinx.coroutines.experimental.future.await
 import kotlinx.coroutines.experimental.runBlocking
-import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
-internal class HackerNewsService @Inject constructor(private val httpClient: HttpClient, private val jsonMapper: JsonMapper) {
+internal class HackerNewsService(
+    private val httpClient: HttpClient,
+    private val jsonMapper: JsonMapper
+) {
 
     private fun topStoriesAsync(): Deferred<List<Int>> = async(CommonPool) {
         val response = httpClient.execute(HttpRequest(GET, "https://hacker-news.firebaseio.com/v0/topstories.json"))
@@ -31,4 +31,5 @@ internal class HackerNewsService @Inject constructor(private val httpClient: Htt
         val topStoryId = topStoriesAsync().await().first()
         storyByIdAsync(topStoryId).await()
     }
+
 }

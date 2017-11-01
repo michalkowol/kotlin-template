@@ -8,11 +8,8 @@ import spark.Request
 import spark.Response
 import spark.Spark.*
 import java.util.*
-import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
-internal class HttpServer @Inject constructor(
+internal class HttpServer(
     private val serverConfiguration: ServerConfiguration,
     private val jsonMapper: JsonMapper,
     private val errorsController: ErrorsController,

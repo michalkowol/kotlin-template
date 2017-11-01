@@ -1,3 +1,3 @@
 package com.michalkowol.cars
 
-data class Car(val id: Int, val name: String)
+internal data class Car(val id: Int, val name: String)

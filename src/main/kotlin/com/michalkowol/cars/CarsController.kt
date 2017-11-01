@@ -8,11 +8,11 @@ import spark.Response
 import spark.Spark.*
 import java.net.HttpURLConnection.HTTP_CREATED
 import java.net.HttpURLConnection.HTTP_NO_CONTENT
-import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
-class CarsController @Inject constructor(private val carsRepository: CarsRepository, private val jsonMapper: JsonMapper) {
+internal class CarsController(
+    private val carsRepository: CarsRepository,
+    private val jsonMapper: JsonMapper
+) {
 
     fun start() {
         get("/cars", this::cars, jsonMapper::write)
@@ -25,8 +25,7 @@ class CarsController @Inject constructor(private val carsRepository: CarsReposit
 
     private fun cars(request: Request, response: Response): List<Car> {
         response.type("application/json")
-        val cars = carsRepository.findAll()
-        return cars
+        return carsRepository.findAll()
     }
 
     private fun carById(request: Request, response: Response): Car {
@@ -69,4 +68,5 @@ class CarsController @Inject constructor(private val carsRepository: CarsReposit
         carsRepository.delete(id)
         return ""
     }
+
 }

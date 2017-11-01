@@ -3,6 +3,8 @@ package com.michalkowol
 import com.google.inject.AbstractModule
 import com.google.inject.Provides
 import com.michalkowol.HttpServer.ServerConfiguration
+import com.michalkowol.cars.CarsController
+import com.michalkowol.hackernews.HackerNewsController
 import com.softwareberg.*
 import com.typesafe.config.Config
 import com.typesafe.config.ConfigFactory
@@ -18,6 +20,7 @@ import javax.inject.Singleton
 import javax.sql.DataSource
 
 internal class HttpClientModule : AbstractModule() {
+
     override fun configure() {}
 
     @Singleton
@@ -31,9 +34,11 @@ internal class HttpClientModule : AbstractModule() {
     private fun provideHttpClient(asyncHttpClient: AsyncHttpClient): HttpClient {
         return SimpleHttpClient(asyncHttpClient)
     }
+
 }
 
 internal class JsonXmlModule : AbstractModule() {
+
     override fun configure() {}
 
     @Singleton
@@ -47,9 +52,11 @@ internal class JsonXmlModule : AbstractModule() {
     private fun provideXmlMapper(): XmlMapper {
         return XmlMapper.create()
     }
+
 }
 
 internal class DatabaseModule : AbstractModule() {
+
     override fun configure() {}
 
     @Singleton
@@ -81,9 +88,11 @@ internal class DatabaseModule : AbstractModule() {
     private fun provideH2Database(): Server {
         return Server.createTcpServer()
     }
+
 }
 
 internal class ConfigModule : AbstractModule() {
+
     override fun configure() {}
 
     @Singleton
@@ -99,10 +108,30 @@ internal class ConfigModule : AbstractModule() {
             .withFallback(ConfigFactory.load(configurationFile))
             .withFallback(ConfigFactory.load())
     }
+
 }
 
 internal class HttpServerModule : AbstractModule() {
+
     override fun configure() {}
+
+    @Singleton
+    @Provides
+    private fun provideHttpServer(
+        serverConfiguration: ServerConfiguration,
+        jsonMapper: JsonMapper,
+        errorsController: ErrorsController,
+        hackerNewsController: HackerNewsController,
+        carsController: CarsController
+    ): HttpServer {
+        return HttpServer(
+            serverConfiguration,
+            jsonMapper,
+            errorsController,
+            hackerNewsController,
+            carsController
+        )
+    }
 
     @Singleton
     @Provides
@@ -110,4 +139,18 @@ internal class HttpServerModule : AbstractModule() {
         val port = config.getInt("server.port")
         return ServerConfiguration(port)
     }
+
 }
+
+internal class ErrorsControllerModule : AbstractModule() {
+
+    override fun configure() {}
+
+    @Singleton
+    @Provides
+    private fun provideErrorsController(jsonMapper: JsonMapper): ErrorsController {
+        return ErrorsController(jsonMapper)
+    }
+
+}
+

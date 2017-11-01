@@ -26,3 +26,6 @@ classes/
 gradle-app.setting
 !gradle-wrapper.jar
 .gradletasknamecache
+tmp.json
+/src/main/generated/
+/generated/

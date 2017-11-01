@@ -2,11 +2,8 @@ package com.michalkowol.cars
 
 import com.softwareberg.Database
 import com.softwareberg.params
-import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
-class CarsRepository @Inject constructor(private val database: Database) {
+internal class CarsRepository(private val database: Database) {
 
     fun findAll(): List<Car> {
         return database.findAll("SELECT id, name FROM cars") { row -> Car(row.int("id"), row.string("name")) }
@@ -34,4 +31,5 @@ class CarsRepository @Inject constructor(private val database: Database) {
         val deletedCount = database.update(sql)
         return deletedCount
     }
+
 }
