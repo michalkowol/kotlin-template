@@ -100,7 +100,7 @@ dependencies {
     testCompile 'com.nhaarman:mockito-kotlin:1.5.0'
 
     integrationTestCompile 'com.ninja-squad:DbSetup-kotlin:2.1.0'
-    integrationTestCompile 'com.despegar:spark-test:1.1.4'
+    integrationTestCompile 'com.despegar:spark-test:1.1.5'
 }
 
 task wrapper(type: Wrapper) {
