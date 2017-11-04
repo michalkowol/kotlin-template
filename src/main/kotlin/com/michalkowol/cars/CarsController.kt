@@ -1,11 +1,14 @@
 package com.michalkowol.cars
 
-import com.michalkowol.BadRequestException
-import com.michalkowol.NotFoundException
+import com.michalkowol.web.errors.BadRequestException
+import com.michalkowol.web.errors.NotFoundException
 import com.softwareberg.JsonMapper
 import spark.Request
 import spark.Response
-import spark.Spark.*
+import spark.Spark.delete
+import spark.Spark.get
+import spark.Spark.post
+import spark.Spark.put
 import java.net.HttpURLConnection.HTTP_CREATED
 import java.net.HttpURLConnection.HTTP_NO_CONTENT
 

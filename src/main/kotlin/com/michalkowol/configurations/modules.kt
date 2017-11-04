@@ -1,11 +1,16 @@
-package com.michalkowol
+package com.michalkowol.configurations
 
 import com.google.inject.AbstractModule
 import com.google.inject.Provides
-import com.michalkowol.HttpServer.ServerConfiguration
 import com.michalkowol.cars.CarsController
 import com.michalkowol.hackernews.HackerNewsController
-import com.softwareberg.*
+import com.michalkowol.web.HttpServer
+import com.michalkowol.web.errors.ErrorsController
+import com.softwareberg.Database
+import com.softwareberg.HttpClient
+import com.softwareberg.JsonMapper
+import com.softwareberg.SimpleHttpClient
+import com.softwareberg.XmlMapper
 import com.typesafe.config.Config
 import com.typesafe.config.ConfigFactory
 import com.zaxxer.hikari.HikariConfig
@@ -15,7 +20,7 @@ import org.asynchttpclient.DefaultAsyncHttpClient
 import org.flywaydb.core.Flyway
 import org.h2.tools.Server
 import java.io.File
-import java.util.*
+import java.util.Optional
 import javax.inject.Singleton
 import javax.sql.DataSource
 

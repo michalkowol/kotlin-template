@@ -1,4 +1,4 @@
-package com.michalkowol
+package com.michalkowol.web.errors
 
 import com.softwareberg.JsonMapper
 import org.slf4j.LoggerFactory

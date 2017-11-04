@@ -1,5 +1,7 @@
 package com.michalkowol
 
+import com.michalkowol.configurations.Configuration
+import com.michalkowol.web.HttpServer
 import org.flywaydb.core.Flyway
 import org.h2.tools.Server
 

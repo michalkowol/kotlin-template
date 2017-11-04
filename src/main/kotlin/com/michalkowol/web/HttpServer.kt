@@ -1,13 +1,19 @@
-package com.michalkowol
+package com.michalkowol.web
 
 import com.google.common.collect.ImmutableMap
 import com.michalkowol.cars.CarsController
+import com.michalkowol.configurations.ServerConfiguration
 import com.michalkowol.hackernews.HackerNewsController
+import com.michalkowol.web.errors.ErrorsController
+import com.michalkowol.web.errors.NotFoundException
 import com.softwareberg.JsonMapper
 import spark.Request
 import spark.Response
-import spark.Spark.*
-import java.util.*
+import spark.Spark.get
+import spark.Spark.port
+import spark.Spark.redirect
+import spark.Spark.staticFiles
+import java.util.Random
 
 internal class HttpServer(
     private val serverConfiguration: ServerConfiguration,
@@ -45,7 +51,5 @@ internal class HttpServer(
         }
         return ImmutableMap.of("health", "ok")
     }
-
-    internal data class ServerConfiguration(val port: Int)
 
 }
