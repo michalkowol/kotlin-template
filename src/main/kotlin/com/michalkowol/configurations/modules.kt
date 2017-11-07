@@ -19,8 +19,6 @@ import org.asynchttpclient.AsyncHttpClient
 import org.asynchttpclient.DefaultAsyncHttpClient
 import org.flywaydb.core.Flyway
 import org.h2.tools.Server
-import java.io.File
-import java.util.Optional
 import javax.inject.Singleton
 import javax.sql.DataSource
 
@@ -103,15 +101,7 @@ internal class ConfigModule : AbstractModule() {
     @Singleton
     @Provides
     private fun provideConfig(): Config {
-        val stage = Optional.ofNullable(System.getProperty("environment"))
-        val configurationFile = stage
-            .map { status -> "application-$status.properties" }
-            .orElse("application.conf")
-
-        return ConfigFactory
-            .parseFile(File("application.conf"))
-            .withFallback(ConfigFactory.load(configurationFile))
-            .withFallback(ConfigFactory.load())
+        return ConfigFactory.load()
     }
 
 }
