@@ -1,5 +1,6 @@
 package com.michalkowol.cars
 
+import com.michalkowol.web.Controller
 import com.michalkowol.web.errors.BadRequestException
 import com.michalkowol.web.errors.NotFoundException
 import com.softwareberg.JsonMapper
@@ -12,12 +13,12 @@ import spark.Spark.put
 import java.net.HttpURLConnection.HTTP_CREATED
 import java.net.HttpURLConnection.HTTP_NO_CONTENT
 
-internal class CarsController(
+class CarsController (
     private val carsRepository: CarsRepository,
     private val jsonMapper: JsonMapper
-) {
+) : Controller {
 
-    fun start() {
+    override fun start() {
         get("/cars", this::cars, jsonMapper::write)
         post("/cars", this::createCar, jsonMapper::write)
         get("/cars/create", this::createCarWithQueryParams, jsonMapper::write)

@@ -7,28 +7,28 @@ import java.net.HttpURLConnection.HTTP_INTERNAL_ERROR
 import java.net.HttpURLConnection.HTTP_NOT_FOUND
 import java.util.*
 
-internal interface ServerError {
+interface ServerError {
     val status: Int
     val code: String
     val id: UUID
     val message: String?
 }
 
-internal class NotFound(
+class NotFound(
     override val message: String,
     override val status: Int = HTTP_NOT_FOUND,
     override val code: String = "NF",
     override val id: UUID = UUID.randomUUID()
 ) : ServerError
 
-internal class BadRequest(
+class BadRequest(
     override val message: String,
     override val status: Int = HTTP_BAD_REQUEST,
     override val code: String = "BR",
     override val id: UUID = UUID.randomUUID()
 ) : ServerError
 
-internal class InternalServerError(
+class InternalServerError(
     override val message: String?,
     val stackTrace: String?,
     override val status: Int = HTTP_INTERNAL_ERROR,

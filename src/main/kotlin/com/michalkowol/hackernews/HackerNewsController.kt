@@ -1,16 +1,17 @@
 package com.michalkowol.hackernews
 
+import com.michalkowol.web.Controller
 import com.softwareberg.JsonMapper
 import spark.Request
 import spark.Response
 import spark.Spark.get
 
-internal class HackerNewsController(
+class HackerNewsController(
     private val hackerNewsService: HackerNewsService,
     private val jsonMapper: JsonMapper
-) {
+) : Controller {
 
-    fun start() {
+    override fun start() {
         get("/news", this::news, jsonMapper::write)
     }
 

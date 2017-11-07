@@ -13,6 +13,7 @@ object Configuration {
         return Guice.createInjector(
             ConfigModule(),
             ErrorsControllerModule(),
+            StaticFilesModule(),
             HttpClientModule(),
             HttpServerModule(),
             HackerNewsModule(),

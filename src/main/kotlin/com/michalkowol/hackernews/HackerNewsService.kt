@@ -10,7 +10,7 @@ import kotlinx.coroutines.experimental.async
 import kotlinx.coroutines.experimental.future.await
 import kotlinx.coroutines.experimental.runBlocking
 
-internal class HackerNewsService(
+class HackerNewsService(
     private val httpClient: HttpClient,
     private val jsonMapper: JsonMapper
 ) {

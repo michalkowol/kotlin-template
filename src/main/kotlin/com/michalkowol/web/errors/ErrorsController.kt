@@ -1,14 +1,15 @@
 package com.michalkowol.web.errors
 
+import com.michalkowol.web.Controller
 import com.softwareberg.JsonMapper
 import org.slf4j.LoggerFactory
 import spark.Spark.exception
 
-internal class ErrorsController(private val jsonMapper: JsonMapper) {
+class ErrorsController(private val jsonMapper: JsonMapper) : Controller {
 
     private val log = LoggerFactory.getLogger(ErrorsController::class.java)
 
-    fun start() {
+    override fun start() {
         exception(NotFoundException::class.java) { ex, request, response ->
             log.info(request.url(), ex)
             response.type("application/json")

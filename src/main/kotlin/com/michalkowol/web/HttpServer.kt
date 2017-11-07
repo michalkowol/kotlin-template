@@ -12,28 +12,27 @@ import spark.Response
 import spark.Spark.get
 import spark.Spark.port
 import spark.Spark.redirect
-import spark.Spark.staticFiles
 import java.util.Random
 
-internal class HttpServer(
+class HttpServer(
     private val serverConfiguration: ServerConfiguration,
     private val jsonMapper: JsonMapper,
     private val errorsController: ErrorsController,
+    private val staticFilesController: StaticFilesController,
     private val hackerNewsController: HackerNewsController,
     private val carsController: CarsController
 ) {
 
     fun start() {
         port(serverConfiguration.port)
-
-        staticFiles.location("/public")
-        redirect.get("/redirect", "/health")
-        get("/health", this::health)
-        get("/errors", this::errors, jsonMapper::write)
-
+        staticFilesController.start()
         errorsController.start()
         carsController.start()
         hackerNewsController.start()
+
+        redirect.get("/redirect", "/health")
+        get("/health", this::health)
+        get("/errors", this::errors, jsonMapper::write)
     }
 
     private fun health(request: Request, response: Response): String {

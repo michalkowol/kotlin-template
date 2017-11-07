@@ -19,10 +19,11 @@ import org.asynchttpclient.AsyncHttpClient
 import org.asynchttpclient.DefaultAsyncHttpClient
 import org.flywaydb.core.Flyway
 import org.h2.tools.Server
+import com.michalkowol.web.StaticFilesController
 import javax.inject.Singleton
 import javax.sql.DataSource
 
-internal class HttpClientModule : AbstractModule() {
+class HttpClientModule : AbstractModule() {
 
     override fun configure() {}
 
@@ -40,7 +41,7 @@ internal class HttpClientModule : AbstractModule() {
 
 }
 
-internal class JsonXmlModule : AbstractModule() {
+class JsonXmlModule : AbstractModule() {
 
     override fun configure() {}
 
@@ -58,7 +59,7 @@ internal class JsonXmlModule : AbstractModule() {
 
 }
 
-internal class DatabaseModule : AbstractModule() {
+class DatabaseModule : AbstractModule() {
 
     override fun configure() {}
 
@@ -94,7 +95,7 @@ internal class DatabaseModule : AbstractModule() {
 
 }
 
-internal class ConfigModule : AbstractModule() {
+class ConfigModule : AbstractModule() {
 
     override fun configure() {}
 
@@ -106,7 +107,20 @@ internal class ConfigModule : AbstractModule() {
 
 }
 
-internal class HttpServerModule : AbstractModule() {
+class StaticFilesModule : AbstractModule() {
+
+    override fun configure() {
+    }
+
+    @Singleton
+    @Provides
+    private fun provideStaticFilesController(): StaticFilesController {
+        return StaticFilesController()
+    }
+
+}
+
+class HttpServerModule : AbstractModule() {
 
     override fun configure() {}
 
@@ -116,6 +130,7 @@ internal class HttpServerModule : AbstractModule() {
         serverConfiguration: ServerConfiguration,
         jsonMapper: JsonMapper,
         errorsController: ErrorsController,
+        staticFilesController: StaticFilesController,
         hackerNewsController: HackerNewsController,
         carsController: CarsController
     ): HttpServer {
@@ -123,6 +138,7 @@ internal class HttpServerModule : AbstractModule() {
             serverConfiguration,
             jsonMapper,
             errorsController,
+            staticFilesController,
             hackerNewsController,
             carsController
         )
@@ -137,7 +153,7 @@ internal class HttpServerModule : AbstractModule() {
 
 }
 
-internal class ErrorsControllerModule : AbstractModule() {
+class ErrorsControllerModule : AbstractModule() {
 
     override fun configure() {}
 

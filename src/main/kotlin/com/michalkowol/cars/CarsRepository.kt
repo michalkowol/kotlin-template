@@ -3,7 +3,7 @@ package com.michalkowol.cars
 import com.softwareberg.Database
 import com.softwareberg.params
 
-internal class CarsRepository(private val database: Database) {
+class CarsRepository(private val database: Database) {
 
     fun findAll(): List<Car> {
         return database.findAll("SELECT id, name FROM cars") { row -> Car(row.int("id"), row.string("name")) }
