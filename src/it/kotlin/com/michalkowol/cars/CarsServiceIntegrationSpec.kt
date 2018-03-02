@@ -31,7 +31,7 @@ class CarsServiceIntegrationSpec {
     }
 
     @Test
-    fun itShouldFindAllCars() {
+    fun `it should find all cars`() {
         // given
         dbSetup(dataSourceResource.dataSource) {
             deleteAllFrom("cars")

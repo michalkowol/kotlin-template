@@ -55,7 +55,7 @@ class CarsControllerIntegrationSpec {
     }
 
     @Test
-    fun itShouldFindAllCarsWithRest() {
+    fun `it should find all cars with rest`() {
         // given
         dataSourceResource.prepareDatabase(deleteAllCars, insertCars)
         val getAllCars = testServer.get("/cars", false)

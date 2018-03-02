@@ -11,7 +11,7 @@ import org.junit.Test
 class CarsServiceSpec {
 
     @Test
-    fun itShouldFindAllCars() {
+    fun `it should find all cars`() {
         // given
         val db = mock<Database> {
             on { findAll(any<String>(), any<Extractor<Car>>()) } doReturn listOf(Car(1, "Audi"), Car(2, "Ford"))
@@ -20,7 +20,6 @@ class CarsServiceSpec {
         // when
         val cars = carsRepository.findAll()
         // then
-        assertThat(cars).hasSize(2)
         assertThat(cars).containsAllOf(Car(1, "Audi"), Car(2, "Ford")).inOrder()
     }
 }
