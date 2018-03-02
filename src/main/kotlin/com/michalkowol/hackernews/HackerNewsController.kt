@@ -19,5 +19,4 @@ class HackerNewsController(
         response.type("application/json")
         return hackerNewsService.topStory()
     }
-
 }

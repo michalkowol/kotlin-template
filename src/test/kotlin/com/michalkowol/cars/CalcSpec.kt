@@ -1,12 +1,9 @@
 package com.michalkowol.cars
 
-import com.natpryce.hamkrest.assertion.assertThat
-import com.natpryce.hamkrest.equalTo
-import com.natpryce.hamkrest.should.shouldMatch
+import com.google.common.truth.Truth.assertThat
 import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.doReturn
 import com.nhaarman.mockito_kotlin.mock
-import org.junit.Assert.assertEquals
 import org.junit.Test
 
 class Calc {
@@ -22,8 +19,7 @@ class CalcSpec {
         // when
         val sum = calc.add(2, 4)
         // then
-        assertThat(6, equalTo(sum))
-        6 shouldMatch equalTo(sum)
+        assertThat(sum).isEqualTo(6)
     }
 
     @Test
@@ -35,6 +31,6 @@ class CalcSpec {
         // when
         val sum = calc.add(3, 1)
         // then
-        assertEquals(3, sum)
+        assertThat(sum).isEqualTo(3)
     }
 }

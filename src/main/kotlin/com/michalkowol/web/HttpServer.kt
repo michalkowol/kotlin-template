@@ -50,5 +50,4 @@ class HttpServer(
         }
         return ImmutableMap.of("health", "ok")
     }
-
 }

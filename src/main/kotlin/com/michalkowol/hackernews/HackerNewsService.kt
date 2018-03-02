@@ -31,5 +31,4 @@ class HackerNewsService(
         val topStoryId = topStoriesAsync().await().first()
         storyByIdAsync(topStoryId).await()
     }
-
 }

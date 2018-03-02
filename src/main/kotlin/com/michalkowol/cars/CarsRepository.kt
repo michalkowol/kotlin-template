@@ -31,5 +31,4 @@ class CarsRepository(private val database: Database) {
         val deletedCount = database.update(sql)
         return deletedCount
     }
-
 }

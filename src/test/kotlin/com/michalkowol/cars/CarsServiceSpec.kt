@@ -1,8 +1,6 @@
 package com.michalkowol.cars
 
-import com.natpryce.hamkrest.assertion.assertThat
-import com.natpryce.hamkrest.equalTo
-import com.natpryce.hamkrest.hasSize
+import com.google.common.truth.Truth.assertThat
 import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.doReturn
 import com.nhaarman.mockito_kotlin.mock
@@ -22,7 +20,7 @@ class CarsServiceSpec {
         // when
         val cars = carsRepository.findAll()
         // then
-        assertThat(cars, hasSize(equalTo(2)))
-        assertThat(cars[0], equalTo(Car(1, "Audi")))
+        assertThat(cars).hasSize(2)
+        assertThat(cars).containsAllOf(Car(1, "Audi"), Car(2, "Ford")).inOrder()
     }
 }

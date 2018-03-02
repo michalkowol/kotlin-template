@@ -21,5 +21,4 @@ class CarsModule : AbstractModule() {
     private fun provideCarsController(carsRepository: CarsRepository, jsonMapper: JsonMapper): CarsController {
         return CarsController(carsRepository, jsonMapper)
     }
-
 }

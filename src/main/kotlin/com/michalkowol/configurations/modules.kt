@@ -38,7 +38,6 @@ class HttpClientModule : AbstractModule() {
     private fun provideHttpClient(asyncHttpClient: AsyncHttpClient): HttpClient {
         return SimpleHttpClient(asyncHttpClient)
     }
-
 }
 
 class JsonXmlModule : AbstractModule() {
@@ -56,7 +55,6 @@ class JsonXmlModule : AbstractModule() {
     private fun provideXmlMapper(): XmlMapper {
         return XmlMapper.create()
     }
-
 }
 
 class DatabaseModule : AbstractModule() {
@@ -92,7 +90,6 @@ class DatabaseModule : AbstractModule() {
     private fun provideH2Database(): Server {
         return Server.createTcpServer()
     }
-
 }
 
 class ConfigModule : AbstractModule() {
@@ -104,7 +101,6 @@ class ConfigModule : AbstractModule() {
     private fun provideConfig(): Config {
         return ConfigFactory.load()
     }
-
 }
 
 class StaticFilesModule : AbstractModule() {
@@ -117,7 +113,6 @@ class StaticFilesModule : AbstractModule() {
     private fun provideStaticFilesController(): StaticFilesController {
         return StaticFilesController()
     }
-
 }
 
 class HttpServerModule : AbstractModule() {
@@ -150,7 +145,6 @@ class HttpServerModule : AbstractModule() {
         val port = config.getInt("server.port")
         return ServerConfiguration(port)
     }
-
 }
 
 class ErrorsControllerModule : AbstractModule() {
@@ -162,6 +156,4 @@ class ErrorsControllerModule : AbstractModule() {
     private fun provideErrorsController(jsonMapper: JsonMapper): ErrorsController {
         return ErrorsController(jsonMapper)
     }
-
 }
-

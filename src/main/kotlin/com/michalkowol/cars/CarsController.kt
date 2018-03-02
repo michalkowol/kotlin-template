@@ -72,5 +72,4 @@ class CarsController (
         carsRepository.delete(id)
         return ""
     }
-
 }

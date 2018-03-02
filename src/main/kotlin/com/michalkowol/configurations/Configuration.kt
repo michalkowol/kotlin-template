@@ -22,5 +22,4 @@ object Configuration {
             DatabaseModule()
         )
     }
-
 }

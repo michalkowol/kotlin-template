@@ -5,7 +5,7 @@ import java.io.StringWriter
 import java.net.HttpURLConnection.HTTP_BAD_REQUEST
 import java.net.HttpURLConnection.HTTP_INTERNAL_ERROR
 import java.net.HttpURLConnection.HTTP_NOT_FOUND
-import java.util.*
+import java.util.UUID
 
 interface ServerError {
     val status: Int
@@ -47,7 +47,5 @@ class InternalServerError(
             throwable.printStackTrace(PrintWriter(errorMsgWriter))
             return errorMsgWriter.toString()
         }
-
     }
-
 }

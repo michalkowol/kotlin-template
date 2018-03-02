@@ -34,5 +34,4 @@ class ErrorsController(private val jsonMapper: JsonMapper) : Controller {
             response.body(jsonMapper.write(internalServerError))
         }
     }
-
 }

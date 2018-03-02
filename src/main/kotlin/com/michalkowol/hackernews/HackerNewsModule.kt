@@ -24,5 +24,4 @@ class HackerNewsModule : AbstractModule() {
     ): HackerNewsController {
         return HackerNewsController(hackerNewsService, jsonMapper)
     }
-
 }
