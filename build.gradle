@@ -74,7 +74,7 @@ kotlinter {
 }
 
 check {
-    dependsOn = check.dependsOn + [ktLint]
+    dependsOn = check.dependsOn + [ktLint, integrationTest]
 }
 
 repositories {

@@ -1,10 +1,8 @@
 package com.michalkowol.cars
 
+import com.google.common.truth.Truth.assertThat
 import com.michalkowol.DataSourceResource
 import com.michalkowol.H2DatabaseResource
-import com.natpryce.hamkrest.assertion.assertThat
-import com.natpryce.hamkrest.equalTo
-import com.natpryce.hamkrest.hasSize
 import com.ninja_squad.dbsetup_kotlin.dbSetup
 import com.softwareberg.Database
 import org.junit.BeforeClass
@@ -48,9 +46,6 @@ class CarsServiceIntegrationSpec {
         // when
         val cars = carsRepository.findAll()
         // then
-        assertThat(cars, hasSize(equalTo(3)))
-        assertThat(cars[0], equalTo(Car(1, "Audi")))
-        assertThat(cars[1], equalTo(Car(2, "Opel")))
-        assertThat(cars[2], equalTo(Car(3, "BMW")))
+        assertThat(cars).containsExactly(Car(1, "Audi"), Car(2, "Opel"), Car(3, "BMW")).inOrder()
     }
 }
