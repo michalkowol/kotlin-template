@@ -1,7 +1,7 @@
 plugins {
     id 'org.jetbrains.kotlin.jvm' version '1.2.30'
     id 'com.github.ben-manes.versions' version '0.17.0'
-    id 'org.jmailen.kotlinter' version '1.7.0'
+    id 'org.jmailen.kotlinter' version '1.8.3'
 }
 
 apply plugin: 'java'
@@ -86,8 +86,8 @@ repositories {
 }
 
 dependencies {
-    ext.kotlinxcoroutines = '0.22.3'
-    ext.rinca = '0.7.0'
+    ext.kotlinxcoroutines = '0.22.5'
+    ext.rinca = '0.7.1'
 
     compile 'org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.2.30'
     compile 'org.jetbrains.kotlin:kotlin-reflect:1.2.30'
@@ -120,7 +120,7 @@ dependencies {
     testCompile 'com.google.truth:truth:0.39'
 
     integrationTestCompile 'com.ninja-squad:DbSetup-kotlin:2.1.0'
-    integrationTestCompile 'com.despegar:spark-test:1.1.5'
+    integrationTestCompile 'com.despegar:spark-test:1.1.6'
 }
 
 task wrapper(type: Wrapper) {
