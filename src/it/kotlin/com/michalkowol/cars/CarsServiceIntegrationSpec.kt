@@ -1,10 +1,10 @@
 package com.michalkowol.cars
 
-import com.google.common.truth.Truth.assertThat
 import com.michalkowol.DataSourceResource
 import com.michalkowol.H2DatabaseResource
 import com.ninja_squad.dbsetup_kotlin.dbSetup
 import com.softwareberg.Database
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.BeforeClass
 import org.junit.ClassRule
 import org.junit.Test
@@ -46,6 +46,6 @@ class CarsServiceIntegrationSpec {
         // when
         val cars = carsRepository.findAll()
         // then
-        assertThat(cars).containsExactly(Car(1, "Audi"), Car(2, "Opel"), Car(3, "BMW")).inOrder()
+        assertThat(cars).containsExactly(Car(1, "Audi"), Car(2, "Opel"), Car(3, "BMW"))
     }
 }

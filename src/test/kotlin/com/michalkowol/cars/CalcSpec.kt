@@ -1,10 +1,10 @@
 package com.michalkowol.cars
 
-import com.google.common.truth.Truth.assertThat
 import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.doReturn
 import com.nhaarman.mockito_kotlin.mock
-import org.junit.Test
+import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.Test
 
 class Calc {
     fun add(a: Int, b: Int): Int = a + b

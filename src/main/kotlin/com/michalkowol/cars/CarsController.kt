@@ -13,7 +13,7 @@ import spark.Spark.put
 import java.net.HttpURLConnection.HTTP_CREATED
 import java.net.HttpURLConnection.HTTP_NO_CONTENT
 
-class CarsController (
+class CarsController(
     private val carsRepository: CarsRepository,
     private val jsonMapper: JsonMapper
 ) : Controller {
