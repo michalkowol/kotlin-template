@@ -14,9 +14,9 @@ object Boot {
     fun start() {
         val injector = Configuration.injector
 
-        val h2DatabaseServer = injector.getInstance(Server::class.java)
-        val flyway = injector.getInstance(Flyway::class.java)
-        val httpServer = injector.getInstance(HttpServer::class.java)
+        val h2DatabaseServer = injector.getInstance<Server>()
+        val flyway = injector.getInstance<Flyway>()
+        val httpServer = injector.getInstance<HttpServer>()
 
         h2DatabaseServer.start()
         flyway.migrate()

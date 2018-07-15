@@ -29,7 +29,7 @@ class ErrorsController(private val jsonMapper: JsonMapper) : Controller {
         exception(Exception::class.java) { ex, request, response ->
             log.error(request.url(), ex)
             response.type("application/json")
-            val internalServerError = InternalServerError.create(ex)
+            val internalServerError = InternalServerError(ex.message)
             response.status(internalServerError.status)
             response.body(jsonMapper.write(internalServerError))
         }

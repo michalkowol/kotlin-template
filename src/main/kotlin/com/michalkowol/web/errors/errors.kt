@@ -1,7 +1,5 @@
 package com.michalkowol.web.errors
 
-import java.io.PrintWriter
-import java.io.StringWriter
 import java.net.HttpURLConnection.HTTP_BAD_REQUEST
 import java.net.HttpURLConnection.HTTP_INTERNAL_ERROR
 import java.net.HttpURLConnection.HTTP_NOT_FOUND
@@ -30,22 +28,7 @@ class BadRequest(
 
 class InternalServerError(
     override val message: String?,
-    val stackTrace: String?,
     override val status: Int = HTTP_INTERNAL_ERROR,
     override val code: String = "IE",
     override val id: UUID = UUID.randomUUID()
-) : ServerError {
-
-    companion object {
-
-        fun create(ex: Exception): InternalServerError {
-            return InternalServerError(ex.message, extractStackTrace(ex))
-        }
-
-        private fun extractStackTrace(throwable: Throwable): String {
-            val errorMsgWriter = StringWriter()
-            throwable.printStackTrace(PrintWriter(errorMsgWriter))
-            return errorMsgWriter.toString()
-        }
-    }
-}
+) : ServerError

@@ -25,14 +25,20 @@ class HttpServer(
 
     fun start() {
         port(serverConfiguration.port)
-        staticFilesController.start()
-        errorsController.start()
-        carsController.start()
-        hackerNewsController.start()
+        start(
+            staticFilesController,
+            errorsController,
+            carsController,
+            hackerNewsController
+        )
 
         redirect.get("/redirect", "/health")
         get("/health", this::health)
         get("/errors", this::errors, jsonMapper::write)
+    }
+
+    private fun start(vararg controllers: Controller) {
+        controllers.forEach { it.start() }
     }
 
     private fun health(request: Request, response: Response): String {
