@@ -20,43 +20,43 @@ Thread HTTP only as your transporting layer. Try to avoid leaking HTTP logic int
 ### Default
 
 ```bash
-gradle
+./gradlew
 ```
 
 ### Build
 
 ```bash
-gradle build
+./gradlew build
 ```
 
 ### Run
 
 ```bash
-gradle run
+./gradlew run
 ```
 
 ### Tests
 
 ```bash
-gradle check
+./gradlew check
 ```
 
 ### Continuous tests
 
 ```bash
-gradle test -t
+./gradlew test -t
 ```
 
 or
 
 ```bash
-gradle test --continuous
+./gradlew test --continuous
 ```
 
 ### Integration tests
     
 ```bash
-gradle integrationTest
+./gradlew integrationTest
 ```
 
 ### FatJar
@@ -80,7 +80,7 @@ task fatJar(type: Jar) {
 ```
 
 ```bash
-gradle fatJar
+./gradlew fatJar
 
 java -jar build/libs/${NAME}-assembly-${VERSION}.jar
 
@@ -93,7 +93,7 @@ java -Denvironment=production -jar build/libs/${NAME}-assembly-${VERSION}.jar
 ### Code coverage
 
 ```bash
-gradle jacocoTestReport
+./gradlew jacocoTestReport
 open build/jacocoHtml/index.html
 ```
 
