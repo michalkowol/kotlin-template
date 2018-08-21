@@ -1,6 +1,5 @@
 package com.michalkowol
 
-import com.michalkowol.base.Slf4jKoinLogger
 import com.michalkowol.cars.carsModule
 import com.michalkowol.configurations.configModule
 import com.michalkowol.configurations.databaseModule
@@ -13,31 +12,30 @@ import com.michalkowol.hackernews.hackerNewsModule
 import com.michalkowol.web.HttpServer
 import org.flywaydb.core.Flyway
 import org.h2.tools.Server
-import org.koin.standalone.KoinComponent
-import org.koin.standalone.StandAloneContext.startKoin
-import org.koin.standalone.get
+import org.kodein.di.Kodein
+import org.kodein.di.generic.instance
 
 fun main(args: Array<String>) {
 
-    startKoin(listOf(
-        configModule,
-        errorsControllerModule,
-        httpClientModule,
-        httpServerModule,
-        hackerNewsModule,
-        demoModule,
-        carsModule,
-        jsonXmlModule,
-        databaseModule
-    ), logger = Slf4jKoinLogger())
-    Boot().start()
+    val kodein = Kodein {
+        import(configModule)
+        import(errorsControllerModule)
+        import(httpClientModule)
+        import(httpServerModule)
+        import(hackerNewsModule)
+        import(demoModule)
+        import(carsModule)
+        import(jsonXmlModule)
+        import(databaseModule)
+    }
+    Boot(kodein).start()
 }
 
-class Boot : KoinComponent {
+class Boot(kodein: Kodein) {
 
-    private val h2DatabaseServer: Server = get()
-    private val flyway: Flyway = get()
-    private val httpServer: HttpServer = get()
+    private val h2DatabaseServer: Server by kodein.instance()
+    private val flyway: Flyway by kodein.instance()
+    private val httpServer: HttpServer by kodein.instance()
 
     fun start() {
         h2DatabaseServer.start()

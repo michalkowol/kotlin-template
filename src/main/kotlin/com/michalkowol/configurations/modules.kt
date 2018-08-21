@@ -16,51 +16,55 @@ import org.asynchttpclient.AsyncHttpClient
 import org.asynchttpclient.DefaultAsyncHttpClient
 import org.flywaydb.core.Flyway
 import org.h2.tools.Server
-import org.koin.dsl.module.module
+import org.kodein.di.Kodein
+import org.kodein.di.generic.allInstances
+import org.kodein.di.generic.bind
+import org.kodein.di.generic.instance
+import org.kodein.di.generic.singleton
 import javax.sql.DataSource
 
-val httpClientModule = module {
-    single { DefaultAsyncHttpClient() as AsyncHttpClient }
-    single { SimpleHttpClient(get()) as HttpClient }
+val httpClientModule = Kodein.Module("httpClientModule") {
+    bind<AsyncHttpClient>() with singleton { DefaultAsyncHttpClient() as AsyncHttpClient }
+    bind<HttpClient>() with singleton { SimpleHttpClient(instance()) as HttpClient }
 }
 
-val jsonXmlModule = module {
-    single { JsonMapper.create() }
-    single { XmlMapper.create() }
+val jsonXmlModule = Kodein.Module("jsonXmlModule") {
+    bind<JsonMapper>() with singleton { JsonMapper.create() }
+    bind<XmlMapper>() with singleton { XmlMapper.create() }
 }
 
-val databaseModule = module {
-    single {
-        val config: Config = get()
+val databaseModule = Kodein.Module("databaseModule") {
+    bind<DataSource>() with singleton {
+        val config: Config = instance()
         val hikariConfig = HikariConfig()
         hikariConfig.jdbcUrl = config.getString("datasource.jdbcUrl")
         hikariConfig.username = config.getString("datasource.username")
         hikariConfig.password = config.getString("datasource.password")
-        HikariDataSource(hikariConfig) as DataSource
+        HikariDataSource(hikariConfig)
     }
-    single { Database(get()) }
-    single {
+    bind<Database>() with singleton { Database(instance()) }
+    bind<Flyway>() with singleton {
         val flyway = Flyway()
-        flyway.dataSource = get()
+        flyway.dataSource = instance()
         flyway
     }
-    single { Server.createTcpServer() as Server }
+    bind<Server>() with singleton { Server.createTcpServer() }
 }
 
-val configModule = module {
-    single { ConfigFactory.load() }
+val configModule = Kodein.Module("configModule") {
+    bind<Config>() with singleton { ConfigFactory.load() }
 }
 
-val httpServerModule = module {
-    single { HttpServer(get(), get(), get(), get(), get(), get(), get()) }
-    single {
-        val config: Config = get()
+val httpServerModule = Kodein.Module("httpServerModule") {
+    bind<HttpServer>() with singleton { HttpServer(instance(), allInstances()) }
+    bind<ServerConfiguration>() with singleton {
+        val config: Config = instance()
         val port = config.getInt("server.port")
         ServerConfiguration(port)
     }
-    single { HealthController(get()) }
+    bind<HealthController>() with singleton { HealthController(instance()) }
 }
 
-val errorsControllerModule = module {
-    single { ErrorsController(get()) }
+val errorsControllerModule = Kodein.Module("errorsControllerModule") {
+    bind<ErrorsController>() with singleton { ErrorsController(instance()) }
 }

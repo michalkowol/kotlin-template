@@ -1,8 +1,11 @@
 package com.michalkowol.hackernews
 
-import org.koin.dsl.module.module
+import org.kodein.di.Kodein
+import org.kodein.di.generic.bind
+import org.kodein.di.generic.instance
+import org.kodein.di.generic.singleton
 
-val hackerNewsModule = module {
-    single { HackerNewsService(get(), get()) }
-    single { HackerNewsController(get(), get()) }
+val hackerNewsModule = Kodein.Module("hackerNewsModule") {
+    bind<HackerNewsService>() with singleton { HackerNewsService(instance(), instance()) }
+    bind<HackerNewsController>() with singleton { HackerNewsController(instance(), instance()) }
 }

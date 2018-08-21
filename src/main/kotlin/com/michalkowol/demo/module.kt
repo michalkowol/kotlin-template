@@ -1,8 +1,11 @@
 package com.michalkowol.demo
 
-import org.koin.dsl.module.module
+import org.kodein.di.Kodein
+import org.kodein.di.generic.bind
+import org.kodein.di.generic.instance
+import org.kodein.di.generic.singleton
 
-val demoModule = module {
-    single { DemoErrorHandlingController(get()) }
-    single { DemoRedirectController() }
+val demoModule = Kodein.Module("demoModule") {
+    bind<DemoErrorHandlingController>() with singleton { DemoErrorHandlingController(instance()) }
+    bind<DemoRedirectController>() with singleton { DemoRedirectController() }
 }
