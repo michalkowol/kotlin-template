@@ -1,6 +1,6 @@
 package com.michalkowol.demo
 
-import com.michalkowol.web.Controller
+import com.michalkowol.base.web.Controller
 import spark.Spark.redirect
 
 class DemoRedirectController : Controller {

@@ -1,6 +1,6 @@
 package com.michalkowol.hackernews
 
-import com.michalkowol.web.Controller
+import com.michalkowol.base.web.Controller
 import com.softwareberg.JsonMapper
 import spark.Request
 import spark.Response

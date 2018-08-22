@@ -1,8 +1,8 @@
 package com.michalkowol.cars
 
-import com.michalkowol.web.Controller
-import com.michalkowol.web.errors.BadRequestException
-import com.michalkowol.web.errors.NotFoundException
+import com.michalkowol.base.web.Controller
+import com.michalkowol.base.web.errors.BadRequestException
+import com.michalkowol.base.web.errors.NotFoundException
 import com.softwareberg.JsonMapper
 import spark.Request
 import spark.Response

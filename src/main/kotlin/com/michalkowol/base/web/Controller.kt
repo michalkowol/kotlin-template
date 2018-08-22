@@ -1,4 +1,4 @@
-package com.michalkowol.web
+package com.michalkowol.base.web
 
 interface Controller {
 

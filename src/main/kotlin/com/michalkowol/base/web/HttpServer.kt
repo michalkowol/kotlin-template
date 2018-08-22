@@ -1,6 +1,5 @@
-package com.michalkowol.web
+package com.michalkowol.base.web
 
-import com.michalkowol.configurations.ServerConfiguration
 import spark.Spark.port
 import spark.Spark.staticFiles
 

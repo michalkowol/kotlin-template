@@ -1,6 +1,6 @@
-package com.michalkowol.web.errors
+package com.michalkowol.base.web.errors
 
-import com.michalkowol.web.Controller
+import com.michalkowol.base.web.Controller
 import com.softwareberg.JsonMapper
 import org.slf4j.LoggerFactory
 import spark.Spark.exception

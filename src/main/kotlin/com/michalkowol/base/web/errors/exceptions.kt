@@ -1,4 +1,4 @@
-package com.michalkowol.web.errors
+package com.michalkowol.base.web.errors
 
 class NotFoundException(
     override val message: String,

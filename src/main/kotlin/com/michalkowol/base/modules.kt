@@ -1,13 +1,10 @@
-package com.michalkowol.configurations
+package com.michalkowol.base
 
-import com.michalkowol.web.HealthController
-import com.michalkowol.web.HttpServer
-import com.michalkowol.web.errors.ErrorsController
-import com.softwareberg.Database
-import com.softwareberg.HttpClient
-import com.softwareberg.JsonMapper
-import com.softwareberg.SimpleHttpClient
-import com.softwareberg.XmlMapper
+import com.michalkowol.base.web.HealthController
+import com.michalkowol.base.web.HttpServer
+import com.michalkowol.base.web.ServerConfiguration
+import com.michalkowol.base.web.errors.ErrorsController
+import com.softwareberg.*
 import com.typesafe.config.Config
 import com.typesafe.config.ConfigFactory
 import com.zaxxer.hikari.HikariConfig
@@ -24,8 +21,8 @@ import org.kodein.di.generic.singleton
 import javax.sql.DataSource
 
 val httpClientModule = Kodein.Module("httpClientModule") {
-    bind<AsyncHttpClient>() with singleton { DefaultAsyncHttpClient() as AsyncHttpClient }
-    bind<HttpClient>() with singleton { SimpleHttpClient(instance()) as HttpClient }
+    bind<AsyncHttpClient>() with singleton { DefaultAsyncHttpClient() }
+    bind<HttpClient>() with singleton { SimpleHttpClient(instance()) }
 }
 
 val jsonXmlModule = Kodein.Module("jsonXmlModule") {
