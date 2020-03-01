@@ -12,11 +12,11 @@ fun main(args: Array<String>) {
 
 object Boot {
 
-    private val h2DatabaseServer: Server by context.instance()
-    private val flyway: Flyway by context.instance()
-    private val httpServer: HttpServer by context.instance()
-
     fun start() {
+        val h2DatabaseServer: Server by context.instance()
+        val flyway: Flyway by context.instance()
+        val httpServer: HttpServer by context.instance()
+
         h2DatabaseServer.start()
         flyway.migrate()
         httpServer.start()
