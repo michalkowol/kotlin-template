@@ -8,7 +8,10 @@ import spark.Response
 import spark.Spark.get
 import java.util.Random
 
+@Suppress("UnusedPrivateMember", "UseCheckOrError", "MagicNumber")
 class DemoErrorHandlingController(private val jsonMapper: JsonMapper) : Controller {
+
+    private val errorTypes: Int = 3
 
     override fun start() {
         get("/errors", this::errors, jsonMapper::write)
@@ -16,7 +19,7 @@ class DemoErrorHandlingController(private val jsonMapper: JsonMapper) : Controll
 
     private fun errors(request: Request, response: Response): Map<String, String> {
         response.type("application/json")
-        val random = Random().nextInt(3)
+        val random = Random().nextInt(errorTypes)
         if (random == 0) {
             throw IllegalStateException("Random error")
         } else if (random == 1) {

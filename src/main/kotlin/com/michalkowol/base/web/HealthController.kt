@@ -5,6 +5,7 @@ import spark.Request
 import spark.Response
 import spark.Spark.get
 
+@Suppress("UnusedPrivateMember")
 class HealthController(private val jsonMapper: JsonMapper) : Controller {
 
     override fun start() {

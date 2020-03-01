@@ -4,9 +4,13 @@ import com.michalkowol.base.web.HealthController
 import com.michalkowol.base.web.HttpServer
 import com.michalkowol.base.web.ServerConfiguration
 import com.michalkowol.base.web.errors.ErrorsController
-import com.softwareberg.*
 import com.typesafe.config.Config
 import com.typesafe.config.ConfigFactory
+import com.softwareberg.Database
+import com.softwareberg.JsonMapper
+import com.softwareberg.HttpClient
+import com.softwareberg.SimpleHttpClient
+import com.softwareberg.XmlMapper
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
 import org.asynchttpclient.AsyncHttpClient
@@ -40,11 +44,7 @@ val databaseModule = Kodein.Module("databaseModule") {
         HikariDataSource(hikariConfig)
     }
     bind<Database>() with singleton { Database(instance()) }
-    bind<Flyway>() with singleton {
-        val flyway = Flyway()
-        flyway.dataSource = instance()
-        flyway
-    }
+    bind<Flyway>() with singleton { Flyway.configure().dataSource(instance()).load() }
     bind<Server>() with singleton { Server.createTcpServer() }
 }
 

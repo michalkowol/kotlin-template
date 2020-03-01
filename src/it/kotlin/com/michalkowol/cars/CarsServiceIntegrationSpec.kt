@@ -10,6 +10,7 @@ import org.junit.ClassRule
 import org.junit.Test
 import org.junit.rules.RuleChain
 
+@Suppress("MagicNumber")
 class CarsServiceIntegrationSpec {
 
     companion object {

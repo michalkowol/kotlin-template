@@ -6,6 +6,7 @@ import spark.Request
 import spark.Response
 import spark.Spark.get
 
+@Suppress("UnusedPrivateMember")
 class HackerNewsController(
     private val hackerNewsService: HackerNewsService,
     private val jsonMapper: JsonMapper

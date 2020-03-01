@@ -2,11 +2,16 @@ package com.michalkowol.cars
 
 import com.softwareberg.Database
 import com.softwareberg.params
+import com.softwareberg.createExtractor
 
+@Suppress("ExpressionBodySyntax")
 class CarsRepository(private val database: Database) {
 
+    private val idName = createExtractor { row -> Car(row.int("id"), row.string("name")) }
+
     fun findAll(): List<Car> {
-        return database.findAll("SELECT id, name FROM cars") { row -> Car(row.int("id"), row.string("name")) }
+        val sql = "SELECT id, name FROM cars"
+        return database.findAll(sql, idName)
     }
 
     fun create(id: Int, name: String): Car {
@@ -23,7 +28,7 @@ class CarsRepository(private val database: Database) {
 
     fun byId(id: Int): Car? {
         val sql = "SELECT id, name FROM cars WHERE id = :id".params("id" to id)
-        return database.findOne(sql) { row -> Car(row.int("id"), row.string("name")) }
+        return database.extractFirstRow(sql, idName)
     }
 
     fun delete(id: Int): Int {

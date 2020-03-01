@@ -5,6 +5,7 @@ import com.softwareberg.JsonMapper
 import org.slf4j.LoggerFactory
 import spark.Spark.exception
 
+@Suppress("StringLiteralDuplication")
 class ErrorsController(private val jsonMapper: JsonMapper) : Controller {
 
     private val log = LoggerFactory.getLogger(ErrorsController::class.java)

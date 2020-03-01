@@ -11,6 +11,7 @@ import org.h2.tools.Server
 import org.junit.rules.ExternalResource
 import javax.sql.DataSource
 
+@Suppress("LateinitUsage")
 class H2DatabaseResource : ExternalResource() {
 
     private lateinit var server: Server
@@ -26,6 +27,7 @@ class H2DatabaseResource : ExternalResource() {
     }
 }
 
+@Suppress("LateinitUsage")
 class DataSourceResource : ExternalResource() {
 
     private lateinit var _dataSource: HikariDataSource
@@ -54,8 +56,7 @@ class DataSourceResource : ExternalResource() {
     }
 
     fun cleanAndMigrateDatabase() {
-        val flyway = Flyway()
-        flyway.dataSource = dataSource
+        val flyway = Flyway.configure().dataSource(dataSource).load()
         flyway.clean()
         flyway.migrate()
     }

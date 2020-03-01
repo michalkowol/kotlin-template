@@ -13,6 +13,7 @@ import spark.Spark.put
 import java.net.HttpURLConnection.HTTP_CREATED
 import java.net.HttpURLConnection.HTTP_NO_CONTENT
 
+@Suppress("StringLiteralDuplication", "UnusedPrivateMember")
 class CarsController(
     private val carsRepository: CarsRepository,
     private val jsonMapper: JsonMapper

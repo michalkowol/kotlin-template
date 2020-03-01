@@ -17,6 +17,7 @@ import org.junit.Test
 import org.junit.rules.RuleChain
 import spark.servlet.SparkApplication
 
+@Suppress("FunctionMaxLength", "MagicNumber")
 class CarsControllerIntegrationSpec {
 
     class TestSparkApplication : SparkApplication {
